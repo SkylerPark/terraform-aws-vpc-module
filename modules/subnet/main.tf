@@ -1,7 +1,3 @@
-data "aws_availability_zones" "available" {
-  exclude_names = var.excloud_avaliability_zones
-}
-
 ###################################################
 # the Subnet Group
 ###################################################
@@ -14,20 +10,10 @@ resource "aws_subnet" "this" {
   cidr_block = each.value.ipv4_cidr
 
   ## IP Assignments
-  map_public_ip_on_launch = (each.value.type == "IPV6"
-    ? false
-    : var.public_ipv4_address_assignment.enabled
-  )
-  assign_ipv6_address_on_creation = (each.value.type == "IPV6"
+  map_public_ip_on_launch = var.public_ipv4_address_assignment.enabled
+  map_customer_owned_ip_on_launch = (var.customer_owned_ipv4_address_assignment.enabled
     ? true
-    : var.ipv6_address_assignment.enabled
-  )
-  map_customer_owned_ip_on_launch = (each.value.type == "IPV6"
-    ? null
-    : (var.customer_owned_ipv4_address_assignment.enabled
-      ? true
-      : null
-    )
+    : null
   )
   outpost_arn = (var.customer_owned_ipv4_address_assignment.enabled
     ? var.customer_owned_ipv4_address_assignment.outpost
@@ -39,13 +25,12 @@ resource "aws_subnet" "this" {
   )
 
   ## DNS Configurations
-  private_dns_hostname_type_on_launch = (each.value.type == "IPV6"
-    ? "resource-name"
-    : local.hostname_types[var.dns_config.hostname_type]
-  )
+  private_dns_hostname_type_on_launch         = var.dns_config.hostname_type
   enable_resource_name_dns_a_record_on_launch = var.dns_config.dns_resource_name_ipv4_enabled
-  enable_resource_name_dns_aaaa_record_on_launch = (each.value.type == "IPV6"
-    ? true
-    : var.dns_config.dns_resource_name_ipv6_enabled
+
+  tags = merge({
+    "Name" = each.key
+    },
+    var.tags
   )
 }
