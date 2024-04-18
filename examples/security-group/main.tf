@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 locals {
-  vpc_id = "vpc-096003bcb29636179"
+  vpc_id = "vpc-xxxx"
 }
 
 module "security_group" {
