@@ -7,9 +7,8 @@ resource "aws_internet_gateway" "this" {
 
   tags = merge(
     {
-      "Name" = coalesce(var.internet_gateway.name, local.metadata.name)
+      "Name" = coalesce(var.internet_gateway.name, "${var.name}-igw")
     },
-    local.module_tags,
     var.tags,
   )
 }
@@ -25,9 +24,8 @@ resource "aws_vpn_gateway" "this" {
 
   tags = merge(
     {
-      "Name" = coalesce(var.vpn_gateway.name, local.metadata.name)
+      "Name" = coalesce(var.vpn_gateway.name, "${var.name}-vgw")
     },
-    local.module_tags,
     var.tags,
   )
 }
