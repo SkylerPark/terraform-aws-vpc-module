@@ -9,7 +9,7 @@ variable "ipv4_cidrs" {
   (필수) IPv4 CIDR 리스트.
     (선택) `type` - CIDR type `MANUAL` and `IPAM_POOL`. Default: `MANUAL`.
     (선택) `cidr` - VPC CIDR block between /16 and /28.
-    (선택) `ipam_pool` - IPAM Pool 을 이용하여 CIDR 할당 
+    (선택) `ipam_pool` - IPAM Pool 을 이용하여 CIDR 할당
       (필수) `id` - IPAM pool ID.
       (선택) `netmask_length` - IPAM pool netmask.
   EOF
@@ -43,7 +43,7 @@ variable "ipv6_cidrs" {
     (선택) `type` - CIDR type `AMAZON` and `IPAM_POOL`. Default: `AMAZON`.
     (선택) `amazon` - VPC에 사용할 Amazon 제공 IPv6 CIDR 을 가져오기 위한 구성. `type` 이 `AMAZON` 일때만 사용됩니다. `amazon` 블록 내용.
       (선택) `network_border_group` - 네트워크 경계 그룹의 이름 입니다. Defaults: VPC 지역 이름.
-    (선택) `ipam_pool` - IPAM Pool 을 이용하여 CIDR 할당 
+    (선택) `ipam_pool` - IPAM Pool 을 이용하여 CIDR 할당
       (필수) `id` - IPAM pool ID.
       (선택) `cidr` - VPC CIDR 블록. Required if `netmask_length` 가 설정 되지 않았고 `allocation_default_netmask` 설정 되지 않았을 경우 필수.
       (선택) `netmask_length` - IPAM pool netmask.
