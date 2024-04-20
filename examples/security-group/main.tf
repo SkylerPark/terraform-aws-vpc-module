@@ -7,14 +7,14 @@ module "vpc" {
   name   = "parksm-test"
   ipv4_cidrs = [
     {
-      cidr = local.vpc_cidr
+      cidr = "10.70.0.0/16"
     }
   ]
-
   internet_gateway = {
     enabled = true
   }
 }
+
 module "security_group" {
   source = "../../modules/security-group"
 
