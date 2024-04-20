@@ -2,16 +2,25 @@ provider "aws" {
   region = "ap-northeast-2"
 }
 
-locals {
-  vpc_id = "vpc-xxxx"
-}
+module "vpc" {
+  source = "../../modules/vpc"
+  name   = "parksm-test"
+  ipv4_cidrs = [
+    {
+      cidr = local.vpc_cidr
+    }
+  ]
 
+  internet_gateway = {
+    enabled = true
+  }
+}
 module "security_group" {
   source = "../../modules/security-group"
 
-  vpc_id = local.vpc_id
+  vpc_id = module.vpc.id
 
-  name = "parksm-rnd-sg"
+  name = "parksm-test-sg"
 
   revoke_rules_on_delete = true
 

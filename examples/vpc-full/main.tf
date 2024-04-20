@@ -4,8 +4,8 @@ provider "aws" {
 
 locals {
   project_name          = "parksm"
-  environment_code      = "rnd"
-  vpc_cidr              = "10.75.0.0/16"
+  environment_code      = "test"
+  vpc_cidr              = "10.70.0.0/16"
   availability_zones    = ["ap-northeast-2a", "ap-northeast-2c"]
   private_subnet_count  = 2
   public_subnet_count   = 2
@@ -32,18 +32,6 @@ module "vpc" {
   }
 }
 
-module "private_subnet_group" {
-  source = "../../modules/subnet-group"
-  name   = "${local.project_name}-${local.environment_code}"
-  vpc_id = module.vpc.id
-  subnets = {
-    for idx in range(local.private_subnet_count) : format("${local.project_name}-${local.environment_code}-private-subnet-0%s", (idx + 1)) => {
-      availability_zone = local.availability_zones[idx % length(local.availability_zones)]
-      ipv4_cidr         = cidrsubnet(local.vpc_cidr, 8, 10 + idx + 1)
-    }
-  }
-}
-
 module "public_subnet_group" {
   source = "../../modules/subnet-group"
   name   = "${local.project_name}-${local.environment_code}"
@@ -51,7 +39,7 @@ module "public_subnet_group" {
   subnets = {
     for idx in range(local.public_subnet_count) : format("${local.project_name}-${local.environment_code}-public-subnet-0%s", (idx + 1)) => {
       availability_zone = local.availability_zones[idx % length(local.availability_zones)]
-      ipv4_cidr         = cidrsubnet(local.vpc_cidr, 8, 30 + idx + 1)
+      ipv4_cidr         = cidrsubnet(local.vpc_cidr, 8, 10 + idx + 1)
     }
   }
 }
@@ -63,19 +51,19 @@ module "database_subnet_group" {
   subnets = {
     for idx in range(local.database_subnet_count) : format("${local.project_name}-${local.environment_code}-database-subnet-0%s", (idx + 1)) => {
       availability_zone = local.availability_zones[idx % length(local.availability_zones)]
-      ipv4_cidr         = cidrsubnet(local.vpc_cidr, 8, 10 + idx + 1)
+      ipv4_cidr         = cidrsubnet(local.vpc_cidr, 8, 20 + idx + 1)
     }
   }
 }
 
-module "lb_subnet_group" {
+module "private_subnet_group" {
   source = "../../modules/subnet-group"
   name   = "${local.project_name}-${local.environment_code}"
   vpc_id = module.vpc.id
   subnets = {
-    for idx in range(local.lb_subnet_count) : format("${local.project_name}-${local.environment_code}-lb-subnet-0%s", (idx + 1)) => {
+    for idx in range(local.private_subnet_count) : format("${local.project_name}-${local.environment_code}-private-subnet-0%s", (idx + 1)) => {
       availability_zone = local.availability_zones[idx % length(local.availability_zones)]
-      ipv4_cidr         = cidrsubnet(local.vpc_cidr, 8, 10 + idx + 1)
+      ipv4_cidr         = cidrsubnet(local.vpc_cidr, 8, 30 + idx + 1)
     }
   }
 }
@@ -136,6 +124,15 @@ module "private_route_table" {
       }
     }
   ]
+
+  propagating_vpn_gateways = []
+}
+
+module "database_route_table" {
+  source  = "../../modules/route-table"
+  name    = "${local.project_name}-${local.environment_code}-database-rt"
+  vpc_id  = module.vpc.id
+  subnets = module.database_subnet_group.ids
 
   propagating_vpn_gateways = []
 }
