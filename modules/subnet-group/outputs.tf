@@ -24,7 +24,7 @@ output "ipv4_cidrs" {
 }
 
 output "ipv6_cidrs" {
-  description = "subnet IPv4 CIDR List."
+  description = "subnet IPv6 CIDR List."
   value       = compact(values(aws_subnet.this)[*].ipv6_cidr_block)
 }
 

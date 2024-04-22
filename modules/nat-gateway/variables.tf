@@ -5,7 +5,7 @@ variable "name" {
 }
 
 variable "is_private" {
-  description = "(Optional) NAT Gateway 를 비공개 혹은 공개 연결 유형. Default: `false` (public)."
+  description = "(필수) NAT Gateway 를 비공개 혹은 공개 연결 유형. Default: `false` (public)."
   type        = bool
   default     = false
   nullable    = false

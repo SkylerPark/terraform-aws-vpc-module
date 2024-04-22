@@ -64,7 +64,7 @@ No modules.
 | <a name="output_elasticache_subnet_group"></a> [elasticache\_subnet\_group](#output\_elasticache\_subnet\_group) | ElastiCache Subnet Group 설정 정보.<br>    `id` - ElastiCache Subnet Group ID.<br>    `arn` - ElastiCache Subnet Group ARN.<br>    `name` - ElastiCache Subnet Group Name. |
 | <a name="output_ids"></a> [ids](#output\_ids) | subnet group id list |
 | <a name="output_ipv4_cidrs"></a> [ipv4\_cidrs](#output\_ipv4\_cidrs) | subnet IPv4 CIDR List. |
-| <a name="output_ipv6_cidrs"></a> [ipv6\_cidrs](#output\_ipv6\_cidrs) | subnet IPv4 CIDR List. |
+| <a name="output_ipv6_cidrs"></a> [ipv6\_cidrs](#output\_ipv6\_cidrs) | subnet IPv6 CIDR List. |
 | <a name="output_memorydb_subnet_group"></a> [memorydb\_subnet\_group](#output\_memorydb\_subnet\_group) | MemoryDB Subnet Group 설정 정보.<br>    `id` - MemoryDB Subnet Group ID.<br>    `arn` - MemoryDB Subnet Group ARN.<br>    `name` - the MemoryDB Subnet Group Name. |
 | <a name="output_name"></a> [name](#output\_name) | subnet group 이름. |
 | <a name="output_neptune_subnet_group"></a> [neptune\_subnet\_group](#output\_neptune\_subnet\_group) | Neptune Subnet Group 설정 정보.<br>    `id` - Neptune Subnet Group ID.<br>    `arn` - Neptune Subnet Group ARN.<br>    `name` - Neptune Subnet Group Name. |
