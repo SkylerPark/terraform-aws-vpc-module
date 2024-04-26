@@ -7,7 +7,7 @@ variable "name" {
 variable "description" {
   description = "(선택) security group 설명."
   type        = string
-  default     = ""
+  default     = "Managed by Terraform."
   nullable    = false
 }
 

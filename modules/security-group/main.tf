@@ -4,8 +4,7 @@
 resource "aws_security_group" "this" {
   vpc_id = var.vpc_id
 
-  name = var.name
-  # name_prefix = var.name_prefix
+  name        = var.name
   description = var.description
 
   revoke_rules_on_delete = var.revoke_rules_on_delete
