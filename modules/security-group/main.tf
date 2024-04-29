@@ -22,9 +22,9 @@ locals {
     for rule in var.ingress_rules :
     concat(
       [
-        for idx, cidr in rule.ipv4_cidrs :
+        for cidr in rule.ipv4_cidrs :
         {
-          id          = "${rule.id}/ipv4/${idx}"
+          id          = "${rule.id}/ipv4/${cidr}"
           description = rule.description
 
           protocol  = rule.protocol
@@ -38,9 +38,9 @@ locals {
         }
       ],
       [
-        for idx, cidr in rule.ipv6_cidrs :
+        for cidr in rule.ipv6_cidrs :
         {
-          id          = "${rule.id}/ipv6/${idx}"
+          id          = "${rule.id}/ipv6/${cidr}"
           description = rule.description
 
           protocol  = rule.protocol
@@ -54,9 +54,9 @@ locals {
         }
       ],
       [
-        for idx, prefix_list in rule.prefix_lists :
+        for prefix_list in rule.prefix_lists :
         {
-          id          = "${rule.id}/prefix-list/${idx}"
+          id          = "${rule.id}/prefix-list/${prefix_list}"
           description = rule.description
 
           protocol  = rule.protocol
@@ -70,9 +70,9 @@ locals {
         }
       ],
       [
-        for idx, security_group in rule.security_groups :
+        for security_group in rule.security_groups :
         {
-          id          = "${rule.id}/security-group/${idx}"
+          id          = "${rule.id}/security-group/${security_group}"
           description = rule.description
 
           protocol  = rule.protocol
@@ -108,9 +108,9 @@ locals {
     for rule in var.egress_rules :
     concat(
       [
-        for idx, cidr in rule.ipv4_cidrs :
+        for cidr in rule.ipv4_cidrs :
         {
-          id          = "${rule.id}/ipv4/${idx}"
+          id          = "${rule.id}/ipv4/${cidr}"
           description = rule.description
 
           protocol  = rule.protocol
@@ -124,9 +124,9 @@ locals {
         }
       ],
       [
-        for idx, cidr in rule.ipv6_cidrs :
+        for cidr in rule.ipv6_cidrs :
         {
-          id          = "${rule.id}/ipv6/${idx}"
+          id          = "${rule.id}/ipv6/${cidr}"
           description = rule.description
 
           protocol  = rule.protocol
@@ -140,9 +140,9 @@ locals {
         }
       ],
       [
-        for idx, prefix_list in rule.prefix_lists :
+        for prefix_list in rule.prefix_lists :
         {
-          id          = "${rule.id}/prefix-list/${idx}"
+          id          = "${rule.id}/prefix-list/${prefix_list}"
           description = rule.description
 
           protocol  = rule.protocol
@@ -156,9 +156,9 @@ locals {
         }
       ],
       [
-        for idx, security_group in rule.security_groups :
+        for security_group in rule.security_groups :
         {
-          id          = "${rule.id}/security-group/${idx}"
+          id          = "${rule.id}/security-group/${security_group}"
           description = rule.description
 
           protocol  = rule.protocol
