@@ -56,7 +56,7 @@ locals {
       [
         for idx, prefix_list in rule.prefix_lists :
         {
-          id          = try("${rule.id}/prefix-list/${prefix_list}", "${rule.id}/prefix-list/${idx}")
+          id          = "${rule.id}/prefix-list/${idx}"
           description = rule.description
 
           protocol  = rule.protocol
@@ -72,7 +72,7 @@ locals {
       [
         for idx, security_group in rule.security_groups :
         {
-          id          = try("${rule.id}/security-group/${security_group}", "${rule.id}/security-group/${idx}")
+          id          = "${rule.id}/security-group/${idx}"
           description = rule.description
 
           protocol  = rule.protocol
@@ -142,7 +142,7 @@ locals {
       [
         for idx, prefix_list in rule.prefix_lists :
         {
-          id          = try("${rule.id}/prefix-list/${prefix_list}", "${rule.id}/prefix-list/${idx}")
+          id          = "${rule.id}/prefix-list/${idx}"
           description = rule.description
 
           protocol  = rule.protocol
@@ -158,7 +158,7 @@ locals {
       [
         for idx, security_group in rule.security_groups :
         {
-          id          = try("${rule.id}/security-group/${security_group}", "${rule.id}/security-group/${idx}")
+          id          = "${rule.id}/security-group/${idx}"
           description = rule.description
 
           protocol  = rule.protocol
